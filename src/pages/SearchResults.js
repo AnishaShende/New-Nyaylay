@@ -6,7 +6,8 @@ import FilterBar from "./components/FilterBar";
 
 function SearchResults() {
   const location = useLocation();
-  const searchQuery = location.state?.searchQuery || "";
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("query") || "No query provided";
 
   const [predictionResult, setPredictionResult] = useState("");
   const [similarCases, setSimilarCases] = useState([]);
