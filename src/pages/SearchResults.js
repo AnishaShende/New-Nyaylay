@@ -71,9 +71,7 @@ function SearchResults() {
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">
             Predictive Analysis on {searchQuery}
-            {predictionResult
-              ? predictionResult
-              : "No predictive analysis available."}
+            {predictionResult}
           </h1>
         </div>
 
@@ -105,46 +103,54 @@ function SearchResults() {
         </div>
 
         <div className="grid gap-4 mt-4">
-          {similarCases.map((caseItem, index) => (
-            <Card
-              key={index}
-              title={caseItem?.Case_name || "N/A"}
-              date={caseItem?.Date || "N/A"}
-              description={caseItem?.Decision || "No decision available"}
-              link="" // Add a link if available
-              caseno={caseItem?.case_details?.["Case No"] || "N/A"}
-              court={caseItem?.case_details?.Court || "Unknown Court"}
-              casestatus={caseItem?.case_details?.["Case Status"] || "N/A"}
-              judge={caseItem?.case_details?.Judge || "Unknown Judge"}
-              sect={caseItem?.case_details?.Section || "N/A"}
-              facts={caseItem?.case_details?.Facts || "No facts provided"}
-              legalissues={
-                caseItem?.case_details?.["Legal Issues"] ||
-                "No legal issues provided"
-              }
-              keylegalques={
-                caseItem?.case_details?.["Key Legal Questions"] ||
-                "No key legal questions provided"
-              }
-              plaintiffarguments={
-                caseItem?.case_details?.["Plaintiff Arguments"] ||
-                "No plaintiff arguments"
-              }
-              defendantarguments={
-                caseItem?.case_details?.["Defendant Arguments"] ||
-                "No defendant arguments"
-              }
-              courtsreasoning={
-                caseItem?.case_details?.["Court's Reasoning"] ||
-                "No court reasoning provided"
-              }
-              decision={caseItem?.case_details?.Decision || "No decision made"}
-              conclusion={caseItem?.case_details?.Conclusion || "No conclusion"}
-              casesummary={
-                caseItem?.case_details?.["Case Summary"] || "No case summary"
-              }
-            />
-          ))}
+          {similarCases.length > 0 ? (
+            similarCases.map((caseItem, index) => (
+              <Card
+                key={index}
+                title={caseItem?.Case_name || "N/A"}
+                date={caseItem?.Date || "N/A"}
+                description={caseItem?.Decision || "No decision available"}
+                link="" // Add a link if available
+                caseno={caseItem?.case_details?.["Case No"] || "N/A"}
+                court={caseItem?.case_details?.Court || "Unknown Court"}
+                casestatus={caseItem?.case_details?.["Case Status"] || "N/A"}
+                judge={caseItem?.case_details?.Judge || "Unknown Judge"}
+                sect={caseItem?.case_details?.Section || "N/A"}
+                facts={caseItem?.case_details?.Facts || "No facts provided"}
+                legalissues={
+                  caseItem?.case_details?.["Legal Issues"] ||
+                  "No legal issues provided"
+                }
+                keylegalques={
+                  caseItem?.case_details?.["Key Legal Questions"] ||
+                  "No key legal questions provided"
+                }
+                plaintiffarguments={
+                  caseItem?.case_details?.["Plaintiff Arguments"] ||
+                  "No plaintiff arguments"
+                }
+                defendantarguments={
+                  caseItem?.case_details?.["Defendant Arguments"] ||
+                  "No defendant arguments"
+                }
+                courtsreasoning={
+                  caseItem?.case_details?.["Court's Reasoning"] ||
+                  "No court reasoning provided"
+                }
+                decision={
+                  caseItem?.case_details?.Decision || "No decision made"
+                }
+                conclusion={
+                  caseItem?.case_details?.Conclusion || "No conclusion"
+                }
+                casesummary={
+                  caseItem?.case_details?.["Case Summary"] || "No case summary"
+                }
+              />
+            ))
+          ) : (
+            <p>No similar cases found.</p>
+          )}
         </div>
       </div>
     </div>
