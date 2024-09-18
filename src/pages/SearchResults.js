@@ -14,7 +14,7 @@ function SearchResults() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await fetch("https://five-years-deny.loca.lt/ask", {
+        const response = await fetch("https://fastapixrailway-production.up.railway.app/ask", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -32,6 +32,7 @@ function SearchResults() {
 
         if (data && data.Data) {
           setPredictionResult(data.Data.Predictive_analysis || "");
+
           setSimilarCases(data.Data.Similar_cases || []);
         } else {
           console.error("Data does not have the expected structure:", data);
@@ -67,6 +68,7 @@ function SearchResults() {
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">
             Predictive Analysis on {searchQuery}
+            {predictionResult}
           </h1>
         </div>
 
