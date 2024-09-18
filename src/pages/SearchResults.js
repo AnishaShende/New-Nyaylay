@@ -14,13 +14,16 @@ function SearchResults() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await fetch("https://fastapixrailway-production.up.railway.app/ask", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ question: searchQuery }),
-        });
+        const response = await fetch(
+          "https://fastapixrailway-production.up.railway.app/ask",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ question: searchQuery }),
+          }
+        );
 
         if (!response.ok) {
           // throw new Error(HTTP error! Status: ${response.status});
@@ -31,9 +34,9 @@ function SearchResults() {
         console.log("API Response:", data); // Print API response to console
 
         if (data && data.Data) {
-          setPredictionResult(data.Data.Predictive_analysis || "");
+          setPredictionResult(data.Data.predictive_analysis || "");
 
-          setSimilarCases(data.Data.Similar_cases || []);
+          setSimilarCases(data.Data.similar_cases || []);
         } else {
           console.error("Data does not have the expected structure:", data);
         }
@@ -68,7 +71,9 @@ function SearchResults() {
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">
             Predictive Analysis on {searchQuery}
-            {predictionResult}
+            {predictionResult
+              ? predictionResult
+              : "No predictive analysis available."}
           </h1>
         </div>
 
@@ -105,32 +110,39 @@ function SearchResults() {
               key={index}
               title={caseItem?.Case_name || "N/A"}
               date={caseItem?.Date || "N/A"}
-              description={caseItem?.Decision || "N/A"}
+              description={caseItem?.Decision || "No decision available"}
               link="" // Add a link if available
               caseno={caseItem?.case_details?.["Case No"] || "N/A"}
-              casename={caseItem?.case_details?.["Case Name"] || "N/A"}
-              court={caseItem?.case_details?.Court || "N/A"}
+              court={caseItem?.case_details?.Court || "Unknown Court"}
               casestatus={caseItem?.case_details?.["Case Status"] || "N/A"}
-              judge={caseItem?.case_details?.Judge || "N/A"}
+              judge={caseItem?.case_details?.Judge || "Unknown Judge"}
               sect={caseItem?.case_details?.Section || "N/A"}
-              facts={caseItem?.case_details?.Facts || "N/A"}
-              petition={caseItem?.case_details?.Petition || "N/A"}
-              legalissues={caseItem?.case_details?.["Legal Issues"] || "N/A"}
+              facts={caseItem?.case_details?.Facts || "No facts provided"}
+              legalissues={
+                caseItem?.case_details?.["Legal Issues"] ||
+                "No legal issues provided"
+              }
               keylegalques={
-                caseItem?.case_details?.["Key Legal Questions"] || "N/A"
+                caseItem?.case_details?.["Key Legal Questions"] ||
+                "No key legal questions provided"
               }
               plaintiffarguments={
-                caseItem?.case_details?.["Plaintiff Arguments"] || "N/A"
+                caseItem?.case_details?.["Plaintiff Arguments"] ||
+                "No plaintiff arguments"
               }
               defendantarguments={
-                caseItem?.case_details?.["Defendant Arguments"] || "N/A"
+                caseItem?.case_details?.["Defendant Arguments"] ||
+                "No defendant arguments"
               }
               courtsreasoning={
-                caseItem?.case_details?.["Court's Reasoning"] || "N/A"
+                caseItem?.case_details?.["Court's Reasoning"] ||
+                "No court reasoning provided"
               }
-              decision={caseItem?.case_details?.Decision || "N/A"}
-              conclusion={caseItem?.case_details?.Conclusion || "N/A"}
-              casesummary={caseItem?.case_details?.["Case Summary"] || "N/A"}
+              decision={caseItem?.case_details?.Decision || "No decision made"}
+              conclusion={caseItem?.case_details?.Conclusion || "No conclusion"}
+              casesummary={
+                caseItem?.case_details?.["Case Summary"] || "No case summary"
+              }
             />
           ))}
         </div>
