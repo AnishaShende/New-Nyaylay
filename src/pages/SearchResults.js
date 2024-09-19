@@ -20,6 +20,7 @@ function SearchResults() {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Authorization: "Bearer f0ee9948-670b-49c9-98ac-8c499fbaa780",
             },
             body: JSON.stringify({ question: searchQuery }),
           }
@@ -34,7 +35,9 @@ function SearchResults() {
         console.log("API Response:", data); // Print API response to console
 
         if (data && data.Data) {
-          setPredictionResult(data.Data.predictive_analysis || "No analysis available");
+          setPredictionResult(
+            data.Data.predictive_analysis || "No analysis available"
+          );
 
           setSimilarCases(data.Data.similar_cases || []);
         } else {
