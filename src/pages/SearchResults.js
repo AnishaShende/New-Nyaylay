@@ -11,6 +11,7 @@ function SearchResults() {
 
   const [predictionResult, setPredictionResult] = useState("");
   const [similarCases, setSimilarCases] = useState([]);
+
   useEffect(() => {
     const fetchResults = async () => {
       try {
@@ -27,21 +28,20 @@ function SearchResults() {
         );
 
         if (!response.ok) {
-          // throw new Error(HTTP error! Status: ${response.status});
-          console.log("error!!!!");
+          console.error("Error in API call, status:", response.status);
+          return;
         }
 
         const data = await response.json();
-        console.log("API Response:", data); // Print API response to console
+        console.log("API Response:", data);
 
         if (data && data.Data) {
           setPredictionResult(
-            data.Data.predictive_analysis || "No analysis available"
+            data.Data.Predictive_analysis || "No analysis available"
           );
-
-          setSimilarCases(data.Data.similar_cases || []);
+          setSimilarCases(data.Data.Similar_cases || []);
         } else {
-          console.error("Data does not have the expected structure:", data);
+          console.error("Unexpected data structure:", data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -70,15 +70,10 @@ function SearchResults() {
       </aside>
 
       <div className="ml-80 pl-0 pr-4">
-        {/* Add SearchHeader component if it exists */}
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">
             Predictive Analysis on {searchQuery}
-            {predictionResult}
           </h1>
-        </div>
-
-        <div className="relative z-12">
           <TextResultBox content={predictionResult} />
         </div>
 
@@ -110,45 +105,39 @@ function SearchResults() {
             similarCases.map((caseItem, index) => (
               <Card
                 key={index}
-                title={caseItem?.Case_name || "N/A"}
-                date={caseItem?.Date || "N/A"}
-                description={caseItem?.Decision || "No decision available"}
-                link="" // Add a link if available
-                caseno={caseItem?.case_details?.["Case No"] || "N/A"}
-                court={caseItem?.case_details?.Court || "Unknown Court"}
-                casestatus={caseItem?.case_details?.["Case Status"] || "N/A"}
-                judge={caseItem?.case_details?.Judge || "Unknown Judge"}
-                sect={caseItem?.case_details?.Section || "N/A"}
-                facts={caseItem?.case_details?.Facts || "No facts provided"}
+                title={caseItem?.case_name || "N/A"} // Updated to "case_name"
+                date={caseItem?.date || "N/A"} // Updated to "date"
+                description={caseItem?.decision || "No decision available"} // Updated to "decision"
+                link="" // You can update this if there's a link in the response
+                caseno={caseItem?.case_id || "N/A"} // Updated to "case_id"
+                court={caseItem?.court || "Unknown Court"} // Updated to "court"
+                casestatus={caseItem?.case_details?.["Case Status"] || "N/A"} // This depends on whether "Case Status" is present in case_details
+                judge={caseItem?.case_details?.Judge || "Unknown Judge"} // Depends on judge being in case_details
+                sect={caseItem?.case_details?.Section || "N/A"} // Depends on section being in case_details
+                facts={caseItem?.facts || "No facts provided"} // Updated to "facts"
                 legalissues={
-                  caseItem?.case_details?.["Legal Issues"] ||
-                  "No legal issues provided"
-                }
+                  caseItem?.legal_issues || "No legal issues provided"
+                } // Updated to "legal_issues"
                 keylegalques={
                   caseItem?.case_details?.["Key Legal Questions"] ||
                   "No key legal questions provided"
-                }
+                } // Same as before
                 plaintiffarguments={
                   caseItem?.case_details?.["Plaintiff Arguments"] ||
                   "No plaintiff arguments"
-                }
+                } // Same as before
                 defendantarguments={
                   caseItem?.case_details?.["Defendant Arguments"] ||
                   "No defendant arguments"
-                }
+                } // Same as before
                 courtsreasoning={
-                  caseItem?.case_details?.["Court's Reasoning"] ||
-                  "No court reasoning provided"
-                }
-                decision={
-                  caseItem?.case_details?.Decision || "No decision made"
-                }
+                  caseItem?.court_reasoning || "No court reasoning provided"
+                } // Updated to "court_reasoning"
+                decision={caseItem?.decision || "No decision made"} // Updated to "decision"
                 conclusion={
                   caseItem?.case_details?.Conclusion || "No conclusion"
-                }
-                casesummary={
-                  caseItem?.case_details?.["Case Summary"] || "No case summary"
-                }
+                } // Same as before
+                casesummary={caseItem?.case_summary || "No case summary"} // Updated to "case_summary"
               />
             ))
           ) : (
