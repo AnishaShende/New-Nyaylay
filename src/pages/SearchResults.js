@@ -41,7 +41,7 @@ function SearchResults() {
 
         if (data && data.Data) {
           setPredictionResult(
-            data.Predictive_analysis || "No analysis available"
+            data.Data.Predictive_analysis || "No analysis available"
           );
           setSimilarCases(data.Data.Similar_cases || []);
         } else {
@@ -89,10 +89,12 @@ function SearchResults() {
         ) : (
           <>
             <div className="flex items-center justify-between mb-4">
-              <h1 className="text-xl font-bold">
+              <h1 className="text-xl font-bold mb-2">
                 Predictive Analysis on {searchQuery}
               </h1>
-              <TextResultBox content={predictionResult} />
+              <div className="bg-gray-100 p-4 rounded-md shadow-md">
+                <TextResultBox content={predictionResult} />
+              </div>
             </div>
 
             <div className="flex items-center justify-between mt-8">
