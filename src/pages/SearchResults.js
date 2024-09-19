@@ -130,16 +130,12 @@ function SearchResults() {
                   caseItem?.defendant_arguments ||
                   "No defendant arguments"
                 } // Same as before
-                petitionsfilled={
-                  caseItem?. ||
-                  "No defendant arguments"
-                } // Same as before
                 courtsreasoning={
                   caseItem?.court_reasoning || "No court reasoning provided"
                 } // Updated to "court_reasoning"
                 decision={caseItem?.decision || "No decision made"} // Updated to "decision"
                 conclusion={
-                  caseItem?.case_details?.conclusion || "No conclusion"
+                  caseItem?.case_details?.Conclusion || "No conclusion"
                 } // Same as before
                 casesummary={caseItem?.case_summary || "No case summary"} // Updated to "case_summary"
               />
