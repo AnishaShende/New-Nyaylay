@@ -41,7 +41,7 @@ function SearchResults() {
 
         if (data && data.Data) {
           setPredictionResult(
-            data.Data.Predictive_analysis || "No analysis available"
+            data.Predictive_analysis || "No analysis available"
           );
           setSimilarCases(data.Data.Similar_cases || []);
         } else {
@@ -154,7 +154,7 @@ function SearchResults() {
                       caseItem?.court_reasoning || "No court reasoning provided"
                     }
                     decision={caseItem?.decision || "No decision made"}
-                    conclusion={caseItem?.Conclusion || "No conclusion"}
+                    conclusion={caseItem?.conclusion || "No conclusion"}
                     casesummary={caseItem?.case_summary || "No case summary"}
                   />
                 ))
