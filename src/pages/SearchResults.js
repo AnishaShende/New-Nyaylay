@@ -112,7 +112,9 @@ function SearchResults() {
                 caseno={caseItem?.case_id || "N/A"} // Updated to "case_id"
                 court={caseItem?.court || "Unknown Court"} // Updated to "court"
                 casestatus={caseItem?.case_status || "N/A"} // This depends on whether "Case Status" is present in case_details
-                judge={caseItem?.case_details?.judges_involved || "Unknown Judge"} // Depends on judge being in case_details
+                judge={
+                  caseItem?.case_details?.judges_involved || "Unknown Judge"
+                } // Depends on judge being in case_details
                 sect={caseItem?.case_details?.sections_clauses || "N/A"} // Depends on section being in case_details
                 facts={caseItem?.facts || "No facts provided"} // Updated to "facts"
                 legalissues={
@@ -123,12 +125,10 @@ function SearchResults() {
                   "No key legal questions provided"
                 } // Same as before
                 plaintiffarguments={
-                  caseItem?.plaintiff_arguments ||
-                  "No plaintiff arguments"
+                  caseItem?.plaintiff_arguments || "No plaintiff arguments"
                 } // Same as before
                 defendantarguments={
-                  caseItem?.defendant_arguments ||
-                  "No defendant arguments"
+                  caseItem?.defendant_arguments || "No defendant arguments"
                 } // Same as before
                 courtsreasoning={
                   caseItem?.court_reasoning || "No court reasoning provided"
