@@ -111,23 +111,27 @@ function SearchResults() {
                 link="" // You can update this if there's a link in the response
                 caseno={caseItem?.case_id || "N/A"} // Updated to "case_id"
                 court={caseItem?.court || "Unknown Court"} // Updated to "court"
-                casestatus={caseItem?.case_details?.["Case Status"] || "N/A"} // This depends on whether "Case Status" is present in case_details
-                judge={caseItem?.case_details?.Judge || "Unknown Judge"} // Depends on judge being in case_details
-                sect={caseItem?.case_details?.Section || "N/A"} // Depends on section being in case_details
+                casestatus={caseItem?.case_status || "N/A"} // This depends on whether "Case Status" is present in case_details
+                judge={caseItem?.case_details?.judges_involved || "Unknown Judge"} // Depends on judge being in case_details
+                sect={caseItem?.case_details?.sections_clauses || "N/A"} // Depends on section being in case_details
                 facts={caseItem?.facts || "No facts provided"} // Updated to "facts"
                 legalissues={
                   caseItem?.legal_issues || "No legal issues provided"
                 } // Updated to "legal_issues"
                 keylegalques={
-                  caseItem?.case_details?.["Key Legal Questions"] ||
+                  caseItem?.key_legal_questions ||
                   "No key legal questions provided"
                 } // Same as before
                 plaintiffarguments={
-                  caseItem?.case_details?.["Plaintiff Arguments"] ||
+                  caseItem?.plaintiff_arguments ||
                   "No plaintiff arguments"
                 } // Same as before
                 defendantarguments={
-                  caseItem?.case_details?.["Defendant Arguments"] ||
+                  caseItem?.defendant_arguments ||
+                  "No defendant arguments"
+                } // Same as before
+                petitionsfilled={
+                  caseItem?. ||
                   "No defendant arguments"
                 } // Same as before
                 courtsreasoning={
@@ -135,7 +139,7 @@ function SearchResults() {
                 } // Updated to "court_reasoning"
                 decision={caseItem?.decision || "No decision made"} // Updated to "decision"
                 conclusion={
-                  caseItem?.case_details?.Conclusion || "No conclusion"
+                  caseItem?.case_details?.conclusion || "No conclusion"
                 } // Same as before
                 casesummary={caseItem?.case_summary || "No case summary"} // Updated to "case_summary"
               />
