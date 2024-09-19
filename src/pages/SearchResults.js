@@ -105,17 +105,15 @@ function SearchResults() {
             similarCases.map((caseItem, index) => (
               <Card
                 key={index}
-                title={caseItem?.case_name || "N/A"} // Updated to "case_name"
-                date={caseItem?.date || "N/A"} // Updated to "date"
+                title={caseItem?.case_name || "Case name not available"} // Updated to "case_name"
+                date={caseItem?.date || "No date"} // Updated to "date"
                 description={caseItem?.decision || "No decision available"} // Updated to "decision"
                 link="" // You can update this if there's a link in the response
-                caseno={caseItem?.case_id || "N/A"} // Updated to "case_id"
+                caseno={caseItem?.case_id || "Case ID not available"} // Updated to "case_id"
                 court={caseItem?.court || "Unknown Court"} // Updated to "court"
-                casestatus={caseItem?.case_status || "N/A"} // This depends on whether "Case Status" is present in case_details
-                judge={
-                  caseItem?.case_details?.judges_involved || "Unknown Judge"
-                } // Depends on judge being in case_details
-                sect={caseItem?.case_details?.sections_clauses || "N/A"} // Depends on section being in case_details
+                casestatus={caseItem?.case_status || "Unknown status"} // This depends on whether "Case Status" is present in case_details
+                judge={caseItem?.judges_involved || "Unknown Judge"} // Depends on judge being in case_details
+                sect={caseItem?.sections_clauses || "No sections or clauses"} // Depends on section being in case_details
                 facts={caseItem?.facts || "No facts provided"} // Updated to "facts"
                 legalissues={
                   caseItem?.legal_issues || "No legal issues provided"
