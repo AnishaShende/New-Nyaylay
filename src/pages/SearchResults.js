@@ -34,7 +34,7 @@ function SearchResults() {
         console.log("API Response:", data); // Print API response to console
 
         if (data && data.Data) {
-          setPredictionResult(data.Data.predictive_analysis || "");
+          setPredictionResult(data.Data.predictive_analysis || "No analysis available");
 
           setSimilarCases(data.Data.similar_cases || []);
         } else {
