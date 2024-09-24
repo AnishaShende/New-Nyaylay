@@ -40,11 +40,12 @@
 
 // export default CaseVisualization;
 
-
 import React, { useState } from 'react';
 import GraphVisualization from './GraphVisualization';
+import { useParams } from 'react-router-dom';
 
-const CaseVisualization = ({ caseId }) => {
+const CaseVisualization = () => {
+    const { caseId } = useParams(); // Get caseId from URL
     const [nodes, setNodes] = useState([]);
     const [edges, setEdges] = useState([]);
 
@@ -84,3 +85,4 @@ const CaseVisualization = ({ caseId }) => {
 };
 
 export default CaseVisualization;
+
