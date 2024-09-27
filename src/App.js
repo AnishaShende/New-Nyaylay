@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // No need to import Router here
 import SearchResults from "./pages/SearchResults";
 import Home from "./pages/Home";
-import CaseVisualization from "./pages/RenderGraph";
+import CaseVisualization from "./pages/components/CaseVisualization"; // Make sure this component doesn't also have a Router
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <div className="font-sans antialiased">
       <Routes>
@@ -15,7 +15,7 @@ function App() {
           path="/search-results"
           element={<SearchResults searchQuery={searchQuery} />}
         />
-        <Route path="/visualize/:caseId" component={CaseVisualization} />
+        <Route path="/visualize/:caseId" element={<CaseVisualization />} />
       </Routes>
     </div>
   );

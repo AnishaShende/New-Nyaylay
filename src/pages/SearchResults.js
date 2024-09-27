@@ -198,6 +198,7 @@ function SearchResults() {
   const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
+    
     const fetchResults = async () => {
       setIsLoading(true); // Start loading
       try {
@@ -223,10 +224,8 @@ function SearchResults() {
         console.log("API Response:", data);
 
         if (data && data.Data) {
-          setPredictionResult(
-            data.Data.Predictive_analysis || "No analysis available"
-          );
-          setSimilarCases(data.Data.Similar_cases || []);
+          setPredictionResult(data?.Data?.Predictive_analysis || "No analysis available");
+          setSimilarCases(data?.Data?.Similar_cases || []);
         } else {
           console.error("Unexpected data structure:", data);
           setErrorMessage("Unexpected response from the server.");
@@ -251,9 +250,18 @@ function SearchResults() {
   };
 
   // Function to navigate to the visualization page
+  // const handleVisualize = (caseId) => {
+  //   if (!caseId) {
+  //     setErrorMessage("Case ID is missing. Cannot visualize.");
+  //     return;
+  //   }
+  //   navigate(`/visualize?case_id=${caseId}`);
+  // };
   const handleVisualize = (caseId) => {
-    navigate(`/visualize?case_id=${caseId}`); // Navigate to the visualize page with case_id as a query parameter
+    // Navigate to the visualization page with relevant data
+    navigate(`/visualize?case_id=${caseId}`, { state: { caseId, similarCases } });
   };
+  
 
   return (
     <div className="relative min-h-screen">
@@ -351,5 +359,7 @@ function SearchResults() {
     </div>
   );
 }
+
+
 
 export default SearchResults;
