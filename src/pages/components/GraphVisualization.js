@@ -88,7 +88,7 @@ const GraphVisualization = ({ caseData }) => {
       const options = {
         nodes: {
           shape: "dot",
-          size: 20,
+          size: 15,
         },
         edges: {
           smooth: true,
