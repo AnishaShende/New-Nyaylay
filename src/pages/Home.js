@@ -2,10 +2,23 @@ import React from 'react';
 import Navbar from './components/Navbar'; // Import Navbar component
 import Header from './components/Header'; // Import Header component
 import Searchbar from './components/SearchBar';
+import GraphVisualization from './components/GraphVisualization';
 
 
 
 function Home() {
+    const nodes = [
+        { id: 1, label: "Node 1", group: "case" },
+        { id: 2, label: "Node 2", group: "judge" },
+        { id: 3, label: "Node 3", group: "section" },
+        { id: 4, label: "Node 4", group: "main_case" },
+    ];
+
+    const edges = [
+        { from: 1, to: 2 },
+        { from: 1, to: 3 },
+        { from: 2, to: 4 },
+    ];
     return (
 
         <div className="font-sans antialiased">
@@ -21,6 +34,11 @@ function Home() {
 
 
                 <Searchbar />
+                <h1>Graph Visualization</h1>
+                <GraphVisualization nodes={nodes} edges={edges} />
+
+
+                
             </main>
 
 
