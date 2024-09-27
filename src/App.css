@@ -65,6 +65,24 @@
   opacity: 0;
 }
 
+/* styles.css */
+
+/* Apply Flexbox to the parent container */
+.parent-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Flex-grow for the graph container with a minimum height */
+.graph-container {
+  flex-grow: 1; /* Allow it to grow to fill space */
+  min-height: 500px; /* Prevent collapsing below 500px */
+  width: 100%; /* Full width */
+  background-color: #f0f0f0; /* Optional background for clarity */
+  border: 1px solid #000; /* Optional border for clarity */
+  overflow: hidden; /* Prevent content overflow */
+}
 
 /* Define the slide-down animation */
 @keyframes slideDown {
